@@ -15,19 +15,22 @@ class MyBottomNavBar extends StatelessWidget {
         tabBackgroundColor: Colors.grey.shade100,
         mainAxisAlignment: MainAxisAlignment.center,
         gap: 8,
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         onTabChange: (value) => onTabChange!(value),
         tabs: [
-            GButton(
-              icon: Icons.home_rounded,
-              text: 'HOME',
-            ),
-            GButton(
-              icon: Icons.settings_rounded,
-              text: 'Profile',
-            ),
-          ],
+          GButton(
+            icon: Icons.home_rounded,
+            text: 'HOME',
+          ),
+          GButton(
+            icon: Icons.favorite_rounded,
+            text: 'Favorites',
+          ),
+          GButton(
+            icon: Icons.account_circle_rounded,
+            text: 'Profile',
+          ),
+        ],
       ),
     );
   }

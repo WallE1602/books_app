@@ -1,7 +1,8 @@
 import 'package:books_app/models/book.dart';
 import 'package:books_app/widgets/book_tile.dart';
-import 'package:books_app/widgets/categoriesWidget.dart';
-import 'package:books_app/widgets/itemWidget.dart';
+import 'package:books_app/widgets/categories_Widget.dart';
+import 'package:books_app/widgets/home_App_Bar.dart';
+import 'package:books_app/widgets/item_Widget.dart';
 import 'package:flutter/material.dart';
 
 class BooksPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _BooksPageState extends State<BooksPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        HomeAppBar(),
         //search bar
         Container(
           padding: const EdgeInsets.only(top: 15),
@@ -106,17 +108,23 @@ class _BooksPageState extends State<BooksPage> {
 
         // Expanded(
         //   child: ListView.builder(
-        //
+        //     itemCount: 6,
         //     itemBuilder: (context, index) {
         //       Book book = Book(
         //           name: 'Book 1',
         //           year: "2023",
         //           imagePath: 'lib/images/book-1.png',
         //           description: "Created by Frank Hubert");
-        //       return BookTile(book: book,);
+        //       return BookTile(
+        //         book: book,
+        //       );
         //     },
         //   ),
-        //
+        // ),
+
+        // const Padding(
+        //   padding: EdgeInsets.only(top: 25.0, left: 25, right: 25),
+        //   child: divide(first, second),
         // ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:books_app/pages/fav_Books_Page.dart';
 import 'package:books_app/pages/home.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
 
       // theme: ThemeData(
@@ -19,6 +20,14 @@ class MyApp extends StatelessWidget {
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
       home: HomePage(),
+
+      // initialRoute: '/',
+      // routes: {
+      //   // When navigating to the "/" route, build the FirstScreen widget.
+      //   '/home': (context) => const HomePage(),
+      //   // When navigating to the "/second" route, build the SecondScreen widget.
+      //   '/favorites': (context) => const FavBooksPage(),
+      // },
       // home: IntroPage(),
     );
   }

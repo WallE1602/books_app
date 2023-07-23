@@ -42,7 +42,7 @@ class ItemsWidget extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.all(8),
                       child: Image.asset(
-                        "lib/images/book-1.png",
+                        "lib/images/$i.png",
                         height: 120,
                         width: 120,
                       ),
@@ -51,7 +51,7 @@ class ItemsWidget extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 8),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Dune",
+                    "Book Title",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.indigo,
@@ -62,7 +62,7 @@ class ItemsWidget extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Novel by Frank Herbert",
+                    "Author",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.indigo,
@@ -75,7 +75,7 @@ class ItemsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "1965",
+                        "Year",
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.black,

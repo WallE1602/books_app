@@ -1,7 +1,8 @@
-import 'package:books_app/pages/booksPage.dart';
-import 'package:books_app/pages/profilePage.dart';
-import 'package:books_app/widgets/bottomNavBar.dart';
-import 'package:books_app/widgets/homeAppBar.dart';
+import 'package:books_app/pages/books_Page.dart';
+import 'package:books_app/pages/fav_Books_Page.dart';
+import 'package:books_app/pages/profile_Page.dart';
+import 'package:books_app/widgets/bottom_Nav_Bar.dart';
+import 'package:books_app/widgets/home_App_Bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,19 +17,21 @@ class _HomePageState extends State<HomePage> {
 
   //to control bottom navbar
   int _selectedIndex = 0;
-  
+
   //method to update selected index
-  void navigateBottomBar(int index){
+  void navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
-    }
-    );
+    });
   }
 
   //pages to display
   final List<Widget> _pages = [
     //books page
     const BooksPage(),
+
+    //fav page
+    const FavBooksPage(),
 
     //profile page
     const ProfilePage(),
@@ -38,14 +41,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body:
-      ListView(
+      body: ListView(
         children: [
-          HomeAppBar(),
+          // HomeAppBar(),
           _pages[_selectedIndex],
         ],
       ),
-
       bottomNavigationBar: MyBottomNavBar(
         onTabChange: (index) => navigateBottomBar(index),
       ),

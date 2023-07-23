@@ -38,6 +38,7 @@ dependencies:
   badges: ^3.1.1
   flutter_svg: ^2.0.7 # it help us to use SVG in our app
   google_nav_bar: ^5.0.6
+  provider:
 
 dev_dependencies:
   flutter_test:

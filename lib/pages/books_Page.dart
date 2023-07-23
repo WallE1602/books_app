@@ -1,9 +1,11 @@
 import 'package:books_app/models/book.dart';
+import 'package:books_app/models/favorite_item.dart';
 import 'package:books_app/widgets/book_tile.dart';
 import 'package:books_app/widgets/categories_Widget.dart';
 import 'package:books_app/widgets/home_App_Bar.dart';
 import 'package:books_app/widgets/item_Widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BooksPage extends StatefulWidget {
   const BooksPage({super.key});
@@ -13,6 +15,20 @@ class BooksPage extends StatefulWidget {
 }
 
 class _BooksPageState extends State<BooksPage> {
+  //adding the shoe to cart
+  void addBookToFav(Book book) {
+    Provider.of<favorite>(context, listen: false).addItemsToFav(book);
+
+    //notif to the user
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Book Successfully added."),
+        content: Text("Check the favorites page."),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -102,7 +118,10 @@ class _BooksPageState extends State<BooksPage> {
         ),
 
         //items widget
-        ItemsWidget(),
+        ItemsWidget(
+          // onTap: () => addBookToFav(Book),
+          onTap: () => {},
+        ),
 
         const SizedBox(height: 10),
 

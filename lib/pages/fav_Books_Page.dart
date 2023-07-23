@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:books_app/models/favitems_samples.dart';
 import 'package:books_app/widgets/fav_nav_bar.dart';
 import 'package:books_app/widgets/home_App_Bar.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,9 @@ class FavBooksPage extends StatelessWidget {
                 topLeft: Radius.circular(35),
                 topRight: Radius.circular(35),
               )),
-          child: const Column(
+          child: Column(
             children: [
-              // FavItemSamples(),
+              FavItemSamples(),
             ],
           ),
         ),

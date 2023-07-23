@@ -23,7 +23,7 @@ class FavNavbar extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              'Cart',
+              'Favourites',
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemsWidget extends StatelessWidget {
-  const ItemsWidget({super.key});
+  ItemsWidget({super.key, required this.onTap});
+
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,22 @@ class ItemsWidget extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
                     ),
-                    Icon(
-                      Icons.favorite_outline,
-                      color: Colors.redAccent,
+                    GestureDetector(
+                      onTap: onTap,
+                      child: Container(
+                        // padding: const EdgeInsets.only(left: 30),
+                        // decoration: const BoxDecoration(
+                        //   color: Colors.indigo,
+                        //   borderRadius: BorderRadius.only(
+                        //     topLeft: Radius.circular(10),
+                        //     // topRight: Radius.circular(10),
+                        //   ),
+                        // ),
+                        child: const Icon(
+                          Icons.favorite_border_rounded,
+                          color: Colors.redAccent,
+                        ),
+                      ),
                     ),
                   ],
                 ),

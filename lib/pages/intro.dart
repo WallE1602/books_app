@@ -1,6 +1,8 @@
 import 'package:books_app/pages/home.dart';
 import 'package:flutter/material.dart';
 
+import 'login.dart';
+
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
@@ -13,9 +15,7 @@ class IntroPage extends StatelessWidget {
           //logo
           Padding(
             padding: const EdgeInsets.all(120),
-            child: Image.asset('lib/images/book.png',
-            height: 250
-            ),
+            child: Image.asset('lib/images/book.png', height: 250),
           ),
 
           const SizedBox(height: 48),
@@ -40,7 +40,6 @@ class IntroPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
 
-
           Container(
             padding: const EdgeInsets.only(top: 15),
           ),
@@ -48,29 +47,30 @@ class IntroPage extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage(),),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(12)
+              MaterialPageRoute(
+                builder: (context) => LoginPage(),
               ),
-              padding: const EdgeInsets.all(25),
-              child: const Center(
-                child: Text("Get Started",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(45.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.indigo,
+                    borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.all(25),
+                child: const Center(
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-
-
             ),
           ),
-
-
         ],
       ),
     );

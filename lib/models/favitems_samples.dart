@@ -21,7 +21,7 @@ class FavItemSamples extends StatelessWidget {
                 Radio(
                   value: '',
                   groupValue: '',
-                  activeColor: Colors.indigo,
+                  activeColor: Colors.blue,
                   onChanged: (index) {},
                 ),
                 Container(
@@ -41,7 +41,7 @@ class FavItemSamples extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.indigo,
+                          color: Colors.blue,
                         ),
                       ),
                       Text(
@@ -49,7 +49,7 @@ class FavItemSamples extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.indigo,
+                          color: Colors.blue,
                         ),
                       ),
                       Text(

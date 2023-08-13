@@ -55,7 +55,7 @@ class IntroPage extends StatelessWidget {
               padding: const EdgeInsets.all(45.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.indigo,
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.all(25),
                 child: const Center(

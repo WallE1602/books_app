@@ -1,5 +1,7 @@
 import 'package:books_app/pages/home.dart';
 import 'package:books_app/pages/reg_page.dart';
+import 'package:books_app/widgets/reusable_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:books_app/common/theme_helper.dart';
@@ -17,6 +19,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   double _headerHeight = 250;
   Key _formKey = GlobalKey<FormState>();
+
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,50 +56,32 @@ class _LoginPageState extends State<LoginPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              Container(
-                                child: TextField(
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'User Name', 'Enter your user name'),
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShadow(),
-                              ),
-                              SizedBox(height: 30.0),
-                              Container(
-                                child: TextField(
-                                  obscureText: true,
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'Password', 'Enter your password'),
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShadow(),
-                              ),
-                              SizedBox(height: 15.0),
-                              Container(
-                                decoration:
-                                    ThemeHelper().buttonBoxDecoration(context),
-                                child: ElevatedButton(
-                                  style: ThemeHelper().buttonStyle(),
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                    child: Text(
-                                      'Sign In'.toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()));
-                                  },
-                                ),
-                              ),
+                              reusableTextField(
+                                  "Enter Email Id",
+                                  Icons.mail_outline_rounded,
+                                  false,
+                                  _emailTextController),
+                              SizedBox(height: 20.0),
+                              reusableTextField(
+                                  "Enter Password",
+                                  Icons.lock_outline,
+                                  true,
+                                  _passwordTextController),
+                              SizedBox(height: 20.0),
+                              firebaseUIButton(context, "Sign In", () {
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: _emailTextController.text,
+                                        password: _passwordTextController.text)
+                                    .then((value) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()));
+                                }).onError((error, stackTrace) {
+                                  print("Error ${error.toString()}");
+                                });
+                              }),
                               Container(
                                 margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
                                 //child: Text('Don\'t have an account? Create'),

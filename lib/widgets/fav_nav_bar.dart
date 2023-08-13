@@ -17,7 +17,7 @@ class FavNavbar extends StatelessWidget {
             child: const Icon(
               Icons.arrow_back,
               size: 30,
-              color: Colors.indigo,
+              color: Colors.blue,
             ),
           ),
           const Padding(
@@ -27,7 +27,7 @@ class FavNavbar extends StatelessWidget {
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo,
+                color: Colors.blue,
               ),
             ),
           ),
@@ -35,7 +35,7 @@ class FavNavbar extends StatelessWidget {
           const Icon(
             Icons.more_vert,
             size: 30,
-            color: Colors.indigo,
+            color: Colors.blue,
           ),
         ],
       ),

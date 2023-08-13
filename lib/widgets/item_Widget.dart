@@ -70,7 +70,7 @@ class ItemsWidget extends StatelessWidget {
                     "Book Title",
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.indigo,
+                      color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -81,7 +81,7 @@ class ItemsWidget extends StatelessWidget {
                     "Author",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.indigo,
+                      color: Colors.blue,
                     ),
                   ),
                 ),

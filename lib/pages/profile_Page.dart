@@ -1,5 +1,7 @@
 import 'package:books_app/pages/intro.dart';
+import 'package:books_app/pages/login.dart';
 import 'package:books_app/widgets/fav_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -39,7 +41,7 @@ class ProfilePage extends StatelessWidget {
         Text(
           'Shah Farhan Abid',
           style: TextStyle(
-              fontSize: 26, color: Colors.indigo, fontWeight: FontWeight.bold),
+              fontSize: 26, color: Colors.blue, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Text(
@@ -65,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                 Icon(
                   Icons.account_circle_sharp,
                   size: 30,
-                  color: Colors.indigo,
+                  color: Colors.blue,
                 ),
                 SizedBox(width: 20),
                 Expanded(child: Text('My Profile')),
@@ -91,7 +93,7 @@ class ProfilePage extends StatelessWidget {
                 Icon(
                   Icons.info_outline_rounded,
                   size: 30,
-                  color: Colors.indigo,
+                  color: Colors.blue,
                 ),
                 SizedBox(width: 20),
                 Expanded(child: Text('Help Center')),
@@ -106,13 +108,19 @@ class ProfilePage extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => IntroPage(),
+              builder: (context) => LoginPage(),
             ),
           ),
           child: Padding(
             padding: EdgeInsets.all(20),
             child: TextButton(
-              onPressed: null,
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  print("Signed Out");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                });
+              },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.all(25),
                 shape: RoundedRectangleBorder(
@@ -124,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                   Icon(
                     Icons.logout_rounded,
                     size: 30,
-                    color: Colors.indigo,
+                    color: Colors.blue,
                   ),
                   SizedBox(width: 20),
                   Expanded(child: Text('Log out')),

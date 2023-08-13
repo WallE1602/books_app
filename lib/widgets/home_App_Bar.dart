@@ -15,7 +15,7 @@ class HomeAppBar extends StatelessWidget {
           Icon(
             Icons.sort,
             size: 30,
-            color: Colors.indigo,
+            color: Colors.blue,
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -26,7 +26,7 @@ class HomeAppBar extends StatelessWidget {
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo,
+                color: Colors.blue,
               ),
             ),
           ),

@@ -27,7 +27,7 @@ class BookTile extends StatelessWidget {
             book.name,
             style: TextStyle(
               fontSize: 18,
-              color: Colors.indigo,
+              color: Colors.blue,
             ),
           ),
 

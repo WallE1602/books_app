@@ -1,12 +1,16 @@
 // ignore_for_file: unused_field, unnecessary_import, unused_import
+import 'package:books_app/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:books_app/common/theme_helper.dart';
 import 'package:books_app/widgets/header_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'profile_page.dart';
+import 'package:books_app/widgets/reusable_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _RegistrationPageState();
@@ -17,13 +21,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
-  DateTime? _selectedDate;
 
-  final List<String> _userTypeOptions = ['Bookworm', 'Casual', 'Admin'];
-
-  final List<String> _genderOptions = ['Male', 'Female', 'Other'];
-
-  TextEditingController _dateController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _userNameTextController = TextEditingController();
+  // TextEditingController _professionTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,124 +110,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 15.0,
+                          height: 25.0,
                         ),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                'First Name', 'Enter your first name'),
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
+                        reusableTextField(
+                            "Enter User Name",
+                            Icons.person_outline,
+                            false,
+                            _userNameTextController),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                'Last Name', 'Enter your last name'),
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(height: 15.0),
-                        Container(
-                          child: TextFormField(
-                            readOnly: true,
-                            controller: _dateController,
-                            decoration: ThemeHelper().textInputDecoration(
-                                'Date of Birth', 'Enter your last name'),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please select your date of birth';
-                              }
-                              return null;
-                            },
-                            onTap: () async {
-                              DateTime? date = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.now());
+                        reusableTextField(
+                            "Enter Email Id",
+                            Icons.mail_outline_rounded,
+                            false,
+                            _emailTextController),
 
-                              if (date != null) {
-                                setState(() {
-                                  _selectedDate = date;
-                                  _dateController.text =
-                                      DateFormat.yMd().format(_selectedDate!);
-                                });
-                              }
-                            },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(height: 15.0),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                'Blood Group', 'Enter your blood group'),
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                'Address', 'Enter your present address'),
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                "E-mail address", "Enter your email"),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (val) {
-                              if (!(val!.isEmpty) &&
-                                  !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                      .hasMatch(val)) {
-                                return "Enter a valid email address";
-                              }
-                              return null;
-                            },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(height: 15.0),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Mobile Number", "Enter your mobile number"),
-                            keyboardType: TextInputType.phone,
-                            validator: (val) {
-                              if (!(val!.isEmpty) &&
-                                  !RegExp(r"^(\d+)*$").hasMatch(val)) {
-                                return "Enter a valid phone number";
-                              }
-                              return null;
-                            },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
-                        SizedBox(height: 15.0),
-                        Container(
-                          child: TextFormField(
-                            obscureText: true,
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Password*", "Enter your password"),
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "Please enter your password";
-                              }
-                              return null;
-                            },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShadow(),
-                        ),
+                        SizedBox(height: 20.0),
+                        reusableTextField("Enter Password", Icons.lock_outlined,
+                            true, _passwordTextController),
                         SizedBox(height: 15.0),
                         FormField<bool>(
                           builder: (state) {
@@ -270,33 +173,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           },
                         ),
                         SizedBox(height: 20.0),
-                        Container(
-                          decoration:
-                              ThemeHelper().buttonBoxDecoration(context),
-                          child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                              child: Text(
-                                "Register".toUpperCase(),
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => ProfilePage()),
-                                    (Route<dynamic> route) => false);
-                              }
-                            },
-                          ),
-                        ),
+
+                        firebaseUIButton(context, "Sign Up", () {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: _emailTextController.text,
+                                  password: _passwordTextController.text)
+                              .then((value) {
+                            print("Created New Account");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          }).onError((error, stackTrace) {
+                            print("Error ${error.toString()}");
+                          });
+                        }),
                         SizedBox(height: 30.0),
                         // Text("Or create account using social media",  style: TextStyle(color: Colors.grey),),
                         // SizedBox(height: 25.0),

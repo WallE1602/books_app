@@ -1,7 +1,6 @@
 import 'package:books_app/models/book.dart';
 import 'package:books_app/models/favorite_item.dart';
 import 'package:books_app/widgets/book_tile.dart';
-import 'package:books_app/widgets/categories_Widget.dart';
 import 'package:books_app/widgets/home_App_Bar.dart';
 import 'package:books_app/widgets/item_Widget.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +111,7 @@ class _BooksPageState extends State<BooksPage> {
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.indigo,
+              color: Colors.blue,
             ),
           ),
         ),

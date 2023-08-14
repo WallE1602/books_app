@@ -25,7 +25,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _userNameTextController = TextEditingController();
-  // TextEditingController _professionTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

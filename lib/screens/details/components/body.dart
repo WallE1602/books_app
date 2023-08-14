@@ -2,7 +2,7 @@ import 'package:books_app/constants.dart';
 import 'package:books_app/models/new_books.dart';
 import 'package:flutter/material.dart';
 
-import 'chat_and_add_to_fav.dart';
+import 'add_to_fav.dart';
 import 'product_image.dart';
 
 class Body extends StatelessWidget {
@@ -82,7 +82,7 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        ChatAndAddToFav(),
+        AddToFav(),
       ],
       // ),
       // ),

@@ -18,16 +18,16 @@ class FavItemSamples extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Radio(
-                  value: '',
-                  groupValue: '',
-                  activeColor: Colors.blue,
-                  onChanged: (index) {},
-                ),
+                // Radio(
+                //   value: '',
+                //   groupValue: '',
+                //   activeColor: Colors.blue,
+                //   onChanged: (index) {},
+                // ),
                 Container(
                   height: 80,
                   width: 80,
-                  margin: const EdgeInsets.only(right: 15),
+                  margin: const EdgeInsets.only(right: 25),
                   child: Image.asset('lib/images/$i.png'),
                 ),
                 const Padding(
@@ -39,7 +39,7 @@ class FavItemSamples extends StatelessWidget {
                       Text(
                         'Book Title',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                         ),
@@ -47,7 +47,7 @@ class FavItemSamples extends StatelessWidget {
                       Text(
                         'Author Name',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                         ),
@@ -55,7 +55,7 @@ class FavItemSamples extends StatelessWidget {
                       Text(
                         'Year',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -66,7 +66,7 @@ class FavItemSamples extends StatelessWidget {
                 // Spacer(),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,

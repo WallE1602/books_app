@@ -9,13 +9,13 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           //logo
           Padding(
-            padding: const EdgeInsets.all(120),
-            child: Image.asset('lib/images/book.png', height: 250),
+            padding: const EdgeInsets.only(top: 140.0),
+            child: Image.asset('lib/images/cover.png', height: 250),
           ),
 
           const SizedBox(height: 48),
@@ -23,7 +23,7 @@ class IntroPage extends StatelessWidget {
           const Text(
             'Boooks',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 40,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -34,7 +34,7 @@ class IntroPage extends StatelessWidget {
           const Text(
             'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...',
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 11,
               color: Colors.grey,
             ),
             textAlign: TextAlign.center,
@@ -55,7 +55,7 @@ class IntroPage extends StatelessWidget {
               padding: const EdgeInsets.all(45.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.indigo,
                     borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.all(25),
                 child: const Center(

@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               reusableTextField(
-                                  "Enter Email Id",
+                                  "Enter Email ID",
                                   Icons.mail_outline_rounded,
                                   false,
                                   _emailTextController),

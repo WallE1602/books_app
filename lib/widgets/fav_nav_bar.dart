@@ -6,36 +6,42 @@ class FavNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(25),
+      // color: Colors.white,
+      padding: const EdgeInsets.all(20),
       child: Row(
         children: [
-          InkWell(
-            onTap: () {
-              // Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              size: 30,
-              color: Colors.blue,
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     // Navigator.pop(context);
+          //   },
+          //   child: const Icon(
+          //     Icons.arrow_back,
+          //     size: 30,
+          //     color: Colors.white,
+          //   ),
+          // ),
           const Padding(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Favourites',
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
+            child: Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Text(
+                'Favourites',
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
               ),
             ),
           ),
           const Spacer(),
-          const Icon(
-            Icons.more_vert,
-            size: 30,
-            color: Colors.blue,
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: const Icon(
+              Icons.more_vert,
+              size: 30,
+              color: Colors.blue,
+            ),
           ),
         ],
       ),

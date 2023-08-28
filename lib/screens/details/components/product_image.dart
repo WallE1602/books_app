@@ -14,6 +14,7 @@ class ProductPoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var products;
     return Container(
       margin: EdgeInsets.symmetric(vertical: kDefaultPadding),
       // the height of this container is 80% of our width
@@ -30,8 +31,14 @@ class ProductPoster extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          Image.asset(
-            image,
+          // Image.asset(
+          //   image,
+          //   height: size.width * 0.75,
+          //   width: size.width * 0.75,
+          //   fit: BoxFit.fitHeight,
+          // ),
+          Image.network(
+            products["books-img"],
             height: size.width * 0.75,
             width: size.width * 0.75,
             fit: BoxFit.fitHeight,

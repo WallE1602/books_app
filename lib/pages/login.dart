@@ -4,10 +4,9 @@ import 'package:books_app/widgets/reusable_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:books_app/common/theme_helper.dart';
 
-import 'profile_page.dart';
 import 'package:books_app/widgets/header_widget.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,8 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   double _headerHeight = 250;
   Key _formKey = GlobalKey<FormState>();
 
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
+  TextEditingController emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -60,27 +59,46 @@ class _LoginPageState extends State<LoginPage> {
                                   "Enter Email ID",
                                   Icons.mail_outline_rounded,
                                   false,
-                                  _emailTextController),
+                                  emailTextController),
                               SizedBox(height: 20.0),
                               reusableTextField(
                                   "Enter Password",
                                   Icons.lock_outline,
                                   true,
-                                  _passwordTextController),
+                                  passwordTextController),
                               SizedBox(height: 20.0),
                               firebaseUIButton(context, "Sign In", () {
                                 FirebaseAuth.instance
                                     .signInWithEmailAndPassword(
-                                        email: _emailTextController.text,
-                                        password: _passwordTextController.text)
+                                        email: emailTextController.text,
+                                        password: passwordTextController.text)
                                     .then((value) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()));
-                                }).onError((error, stackTrace) {
-                                  print("Error ${error.toString()}");
-                                });
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePage()));
+                                    })
+                                    .whenComplete(
+                                      () => Get.snackbar(
+                                          "Welcome!", "You are logged in.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor:
+                                              Colors.indigo.withOpacity(0.8),
+                                          colorText: Colors.white),
+                                    )
+                                    .catchError((error, stackTrace) {
+                                      Get.snackbar("Error!",
+                                          "Something went wrong. Try again.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor:
+                                              Colors.redAccent.withOpacity(0.1),
+                                          colorText: Colors.red);
+                                      print(error.toString());
+                                    });
+                                // .onError((error, stackTrace) {
+                                //   print("Error ${error.toString()}");
+                                // });
                               }),
                               Container(
                                 margin: EdgeInsets.fromLTRB(10, 20, 10, 20),

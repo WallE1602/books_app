@@ -25,7 +25,7 @@ class SearchBox extends StatelessWidget {
       ),
       child: TextField(
         onChanged: onChanged,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,

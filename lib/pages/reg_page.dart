@@ -1,11 +1,11 @@
-// ignore_for_file: unused_field, unnecessary_import, unused_import
 import 'package:books_app/pages/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:books_app/common/theme_helper.dart';
 import 'package:books_app/widgets/header_widget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'profile_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:books_app/widgets/reusable_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,13 +18,149 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  // final controller = Get.put(SignUpController());
   final _formKey = GlobalKey<FormState>();
-  bool checkedValue = false;
-  bool checkboxValue = false;
 
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController profController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  // bool _obscureText = true;
+
+  signUp() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      var authCredential = userCredential.user;
+      print(authCredential!.uid);
+      if (authCredential.uid.isNotEmpty) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (_) => LoginPage()));
+        //     .whenComplete(
+        //   () => Get.snackbar("Hurrah!", "User Authenticated",
+        //       snackPosition: SnackPosition.BOTTOM,
+        //       backgroundColor: Colors.green.withOpacity(0.8),
+        //       colorText: Colors.white),
+        // )
+        //     .catchError((error, stackTrace) {
+        //   Get.snackbar("Error!", "Something went wrong. Try again.",
+        //       snackPosition: SnackPosition.BOTTOM,
+        //       backgroundColor: Colors.redAccent.withOpacity(0.1),
+        //       colorText: Colors.red);
+        //   print(error.toString());
+        // });
+      } else {
+        Fluttertoast.showToast(msg: "Something is wrong");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(msg: "The password provided is too weak.");
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: "The account already exists for that email.");
+      }
+    } catch (e) {
+      //nothing needed
+    }
+  }
+
+  sendUserDataToDB() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users");
+    return _collectionRef
+        .doc()
+        .set({
+          "username": usernameController.text,
+          "phone": phoneController.text,
+          "profession": profController.text,
+          "email": emailController.text,
+          "password": passwordController.text,
+        })
+        .then((value) => print("user added to db."))
+        .catchError((error) => print("something wrong. $error"))
+        .whenComplete(
+          () => Get.snackbar("Success!", "Registration Complete!",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.8),
+              colorText: Colors.white),
+        );
+  }
+
+  // sendUserDataToDB() async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   var currentUser = _auth.currentUser;
+
+  //   CollectionReference _collectionRef =
+  //       FirebaseFirestore.instance.collection("users");
+  //   return _collectionRef.doc(currentUser!.email).set({
+  //     "user_name": userNameTextController.text,
+  //     "profession": profController.text,
+  //     "phone": phoneController.text,
+  //     "e-mail": emailTextController.text,
+  //     // "password": passwordTextController.text,
+  //   }).then((value) {
+  //     Navigator.push(
+  //             context, MaterialPageRoute(builder: (context) => LoginPage()))
+  //         .whenComplete(
+  //       () => Get.snackbar("Success!", "Registration Complete!",
+  //           snackPosition: SnackPosition.BOTTOM,
+  //           backgroundColor: Colors.green.withOpacity(0.8),
+  //           colorText: Colors.white),
+  //     );
+  //   });
+  // }
+
+  // sendUserDataToDB() async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   var currentUser = _auth.currentUser;
+
+  //   if (currentUser != null) {
+  //     CollectionReference _collectionRef =
+  //         FirebaseFirestore.instance.collection("users");
+
+  //     try {
+  //       await _collectionRef.doc(currentUser.email).set({
+  //         "user_name": userNameTextController.text,
+  //         "profession": profController.text,
+  //         "phone": phoneController.text,
+  //         "e-mail": emailTextController.text,
+  //       });
+
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => LoginPage()),
+  //       );
+  //       // .whenComplete(() {
+  //       //   Get.snackbar(
+  //       //     "Success!",
+  //       //     "Registration Complete!",
+  //       //     snackPosition: SnackPosition.BOTTOM,
+  //       //     backgroundColor: Colors.green.withOpacity(0.8),
+  //       //     colorText: Colors.white,
+  //       //   );
+  //       // });
+  //     } catch (error) {
+  //       Get.snackbar(
+  //         "Error!",
+  //         "Something went wrong. Try again.",
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         backgroundColor: Colors.redAccent.withOpacity(0.1),
+  //         colorText: Colors.red,
+  //       );
+  //       print(error.toString());
+  //     }
+  //   } else {
+  //     print("Not Working");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,151 +244,43 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25.0,
                         ),
-                        reusableTextField(
-                            "Enter User Name",
-                            Icons.person_outline,
-                            false,
-                            _userNameTextController),
+                        reusableTextField("Enter User Name",
+                            Icons.person_outline, false, usernameController),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        reusableTextField("Enter your profession",
+                            Icons.badge_outlined, false, profController),
                         const SizedBox(
                           height: 20,
                         ),
                         reusableTextField(
-                            "Enter Email Id",
-                            Icons.mail_outline_rounded,
+                            "Enter your phone number",
+                            Icons.phone_android_rounded,
                             false,
-                            _emailTextController),
-
+                            phoneController),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        reusableTextField("Enter Email",
+                            Icons.mail_outline_rounded, false, emailController),
                         SizedBox(height: 20.0),
                         reusableTextField("Enter Password", Icons.lock_outlined,
-                            true, _passwordTextController),
-                        SizedBox(height: 15.0),
-                        FormField<bool>(
-                          builder: (state) {
-                            return Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                        value: checkboxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            checkboxValue = value!;
-                                            state.didChange(value);
-                                          });
-                                        }),
-                                    Text(
-                                      "I accept all terms and conditions.",
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    state.errorText ?? '',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Theme.of(context).errorColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                          validator: (value) {
-                            if (!checkboxValue) {
-                              return 'You need to accept terms and conditions';
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
+                            true, passwordController),
                         SizedBox(height: 20.0),
-
+                        firebaseUIButton(context, "Save To DB", () {
+                          // signUp();
+                          sendUserDataToDB();
+                        }),
+                        SizedBox(height: 10.0),
                         firebaseUIButton(context, "Sign Up", () {
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: _emailTextController.text,
-                                  password: _passwordTextController.text)
-                              .then((value) {
-                            print("Created New Account");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
-                          }).onError((error, stackTrace) {
-                            print("Error ${error.toString()}");
-                          });
+                          signUp();
+                          // sendUserDataToDB();
                         }),
                         SizedBox(height: 30.0),
-                        // Text("Or create account using social media",  style: TextStyle(color: Colors.grey),),
-                        // SizedBox(height: 25.0),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     GestureDetector(
-                        //       child: FaIcon(
-                        //         FontAwesomeIcons.googlePlus, size: 35,
-                        //         color: HexColor("#EC2D2F"),),
-                        //       onTap: () {
-                        //         setState(() {
-                        //           showDialog(
-                        //             context: context,
-                        //             builder: (BuildContext context) {
-                        //               return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.",context);
-                        //             },
-                        //           );
-                        //         });
-                        //       },
-                        //     ),
-                        //     SizedBox(width: 30.0,),
-                        //     GestureDetector(
-                        //       child: Container(
-                        //         padding: EdgeInsets.all(0),
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(100),
-                        //           border: Border.all(width: 5, color: HexColor("#40ABF0")),
-                        //           color: HexColor("#40ABF0"),
-                        //         ),
-                        //         child: FaIcon(
-                        //           FontAwesomeIcons.twitter, size: 23,
-                        //           color: HexColor("#FFFFFF"),),
-                        //       ),
-                        //       onTap: () {
-                        //         setState(() {
-                        //           showDialog(
-                        //             context: context,
-                        //             builder: (BuildContext context) {
-                        //               return ThemeHelper().alartDialog("Twitter","You tap on Twitter social icon.",context);
-                        //             },
-                        //           );
-                        //         });
-                        //       },
-                        //     ),
-                        //     SizedBox(width: 30.0,),
-                        //     GestureDetector(
-                        //       child: FaIcon(
-                        //         FontAwesomeIcons.facebook, size: 35,
-                        //         color: HexColor("#3E529C"),),
-                        //       onTap: () {
-                        //         setState(() {
-                        //           showDialog(
-                        //             context: context,
-                        //             builder: (BuildContext context) {
-                        //               return ThemeHelper().alartDialog("Facebook",
-                        //                   "You tap on Facebook social icon.",
-                        //                   context);
-                        //             },
-                        //           );
-                        //         });
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
                       ],
                     ),
                   ),
@@ -264,8 +292,4 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
     );
   }
-}
-
-class DateFormat {
-  static yMd() {}
 }

@@ -1,22 +1,25 @@
 import 'package:books_app/constants.dart';
+// ignore: unused_import
 import 'package:books_app/models/new_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'components/body.dart';
 
-class DetailsScreen extends StatelessWidget {
-  final Product product;
+class DetailsScreen extends StatefulWidget {
+  const DetailsScreen(product, {super.key});
 
-  const DetailsScreen({Key? key, required this.product}) : super(key: key);
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       appBar: buildAppBar(context),
-      body: Body(
-        product: product,
-      ),
+      body: Body(),
     );
   }
 
@@ -32,16 +35,6 @@ class DetailsScreen extends StatelessWidget {
         },
       ),
       centerTitle: false,
-      // title: Text(
-      //   'Back'.toUpperCase(),
-      //   style: Theme.of(context).textTheme.bodyText2,
-      // ),
-      // actions: <Widget>[
-      //   IconButton(
-      //     icon: SvgPicture.asset('lib/icons/cart_with_item.svg'),
-      //     onPressed: () {},
-      //   ),
-      // ],
     );
   }
 }

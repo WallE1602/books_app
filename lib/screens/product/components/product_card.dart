@@ -7,13 +7,15 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
     required this.itemIndex,
-    required this.product,
+    required this.products,
     required this.press,
   }) : super(key: key);
 
-  final int itemIndex;
-  final Product product;
+  final Map<String, dynamic> products;
   final void Function()? press;
+
+  final int itemIndex;
+  // final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +54,20 @@ class ProductCard extends StatelessWidget {
               top: 5,
               right: 0,
               child: Hero(
-                tag: '${product.id}',
+                tag: '${products["book-name"]}',
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                   height: 160,
                   // image is square but we add extra 20 + 20 padding thats why width is 200
                   width: 150,
-                  child: Image.asset(
-                    product.image,
+                  child: Image.network(
+                    products["book-img"],
                     fit: BoxFit.cover,
                   ),
+                  // Image.asset(
+                  //   product.image,
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
               ),
             ),
@@ -81,7 +87,7 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: kDefaultPadding),
                       child: Text(
-                        product.title,
+                        "${products["book-name"]}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -93,7 +99,7 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: kDefaultPadding),
                       child: Text(
-                        product.author,
+                        "${products["book-author"]}",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -117,7 +123,7 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "${product.year}",
+                          "${products["book-year"]}",
                           style: Theme.of(context).textTheme.button,
                         ),
                       ),

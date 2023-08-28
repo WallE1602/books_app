@@ -37,8 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.2
+  cloud_firestore: ^4.8.4
   hexcolor: ^3.0.1
-  font_awesome_flutter: ^9.1.0
+  font_awesome_flutter: ^10.5.0
   otp_text_field: ^1.1.1
   google_fonts: ^5.1.0
   intl: ^0.18.0
@@ -47,6 +48,9 @@ dependencies:
   google_nav_bar: ^5.0.6
   http: ^1.1.0
   provider:
+  get: ^4.6.5
+  fluttertoast: ^8.2.2
+  firebase_storage: ^11.2.6
 
 dev_dependencies:
   flutter_test:

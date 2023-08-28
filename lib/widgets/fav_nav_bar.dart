@@ -10,16 +10,6 @@ class FavNavbar extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Row(
         children: [
-          // InkWell(
-          //   onTap: () {
-          //     // Navigator.pop(context);
-          //   },
-          //   child: const Icon(
-          //     Icons.arrow_back,
-          //     size: 30,
-          //     color: Colors.white,
-          //   ),
-          // ),
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Padding(
